@@ -98,5 +98,4 @@ func TestPatchValue(t *testing.T) {
 	if value != 1 {
 		t.Fatal("recover patch value failed")
 	}
-
 }

@@ -116,21 +116,19 @@ func TestMockInstFunc(t *testing.T) {
 
 func TestPatchValue(t *testing.T) {
 	value := int(1)
-	func() {
-		tt := new(Test)
-		defer tt.Close()
 
-		tt.PatchValue(&value, 2)
+	tt := new(Test)
 
-		if value != 2 {
-			t.Fatal("patch value failed")
-		}
-	}()
+	tt.PatchValue(&value, 2)
+
+	if value != 2 {
+		t.Fatal("patch value failed")
+	}
+	tt.Close()
 
 	if value != 1 {
 		t.Fatal("recover patch value failed")
 	}
-
 }
 ```
 
