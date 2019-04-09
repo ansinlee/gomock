@@ -13,6 +13,7 @@ Get started:
   * Install testify with [one line of code](#installation), or [update it with another](#staying-up-to-date)
   * For an introduction to writing test code in Go, see http://golang.org/doc/code.html#Testing
   * Check out the API Documentation http://godoc.org/github.com/ansinlee/gotest
+  * Check out more about the mock API Documentation https://godoc.org/github.com/stretchr/testify/mock
   * A little about [Test-Driven Development (TDD)](http://en.wikipedia.org/wiki/Test-driven_development)
 
 
