@@ -30,7 +30,7 @@ See it in action:
 ```go
 // run command: go test -v -gcflags=-l
 
-package yours
+package gotest
 
 import (
 	"fmt"
