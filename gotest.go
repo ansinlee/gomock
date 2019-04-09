@@ -10,11 +10,38 @@ import (
 
 type Test struct {
 	mock.Mock
+	patch map[reflect.Value]reflect.Value
+}
+
+// Patch a value to this Test.
+//
+//     t.PatchValue(&orm.Debug, true)
+func (t *Test) PatchValue(target, replace interface{}) {
+	tv := reflect.Indirect(reflect.ValueOf(target))
+	rv := reflect.Indirect(reflect.ValueOf(replace))
+
+	if !tv.CanSet() {
+		panic("target has to be a prt can set")
+	}
+
+	if t.patch == nil {
+		t.patch = make(map[reflect.Value]reflect.Value)
+	}
+
+	// only save the oldest
+	if _, ok := t.patch[tv]; !ok {
+		// copy and save old value
+		old := reflect.New(tv.Type()).Elem()
+		old.Set(tv)
+		t.patch[tv] = old
+	}
+
+	tv.Set(reflect.Indirect(rv))
 }
 
 // Stub a func to this Test.
 //
-//     t.Stub("MyMethod", Func)
+//     t.StubFunc("MyMethod", Func)
 func (t *Test) StubFunc(fnIn, fnOut interface{}) {
 	monkey.Patch(fnIn, fnOut)
 	return
@@ -31,7 +58,7 @@ func (t *Test) StubInstFunc(target interface{}, methodName string, replacement i
 
 // Mock a func to this Test.
 //
-//     t.Mock("MyMethod", Func)
+//     t.MockFunc("MyMethod", Func)
 func (t *Test) MockFunc(methodName string, fn interface{}) {
 	if v := reflect.ValueOf(fn); v.Kind() != reflect.Func {
 		panic(fmt.Sprintf("must be a Func in expectations. fn Type is \"%T\")", fn))
@@ -88,5 +115,8 @@ func (t *Test) MockInstFunc(methodName string, target interface{}) {
 //     t.Close()
 func (t *Test) Close() {
 	monkey.UnpatchAll()
+	for v, it := range t.patch {
+		v.Set(it)
+	}
 	return
 }

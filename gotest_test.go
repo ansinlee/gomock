@@ -82,3 +82,21 @@ func TestMockInstFunc(t *testing.T) {
 	//assert
 	tt.AssertExpectations(t)
 }
+
+func TestPatchValue(t *testing.T) {
+	value := int(1)
+
+	tt := new(Test)
+
+	tt.PatchValue(&value, 2)
+
+	if value != 2 {
+		t.Fatal("patch value failed")
+	}
+	tt.Close()
+
+	if value != 1 {
+		t.Fatal("recover patch value failed")
+	}
+
+}

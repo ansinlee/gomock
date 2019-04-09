@@ -114,6 +114,25 @@ func TestMockInstFunc(t *testing.T) {
 	//assert
 	tt.AssertExpectations(t)
 }
+
+func TestPatchValue(t *testing.T) {
+	value := int(1)
+	func() {
+		tt := new(Test)
+		defer tt.Close()
+
+		tt.PatchValue(&value, 2)
+
+		if value != 2 {
+			t.Fatal("patch value failed")
+		}
+	}()
+
+	if value != 1 {
+		t.Fatal("recover patch value failed")
+	}
+
+}
 ```
 
 For more information on how to write mock code, check out the [API documentation for the `gotest` package](http://godoc.org/github.com/ansinlee/gotest).
