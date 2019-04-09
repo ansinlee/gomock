@@ -5,8 +5,8 @@ Go code (golang) set of packages that provide many tools for testifying that you
 
 Features include:
 
-  * [Stub](#assert-package)
-  * [Mock](#mock-package)
+  * [Stub] stub both package and struct method
+  * [Mock] mock package and stuct method without interface
 
 Get started:
 
