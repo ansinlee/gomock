@@ -1,4 +1,4 @@
-GoTest 
+Go Mock
 ================================
 
 Go code (golang) set of packages that provide many tools for testifying that your code will behave as you intend.
@@ -12,13 +12,13 @@ Get started:
 
   * Install testify with [one line of code](#installation), or [update it with another](#staying-up-to-date)
   * For an introduction to writing test code in Go, see http://golang.org/doc/code.html#Testing
-  * Check out the API Documentation http://godoc.org/github.com/ansinlee/gotest
+  * Check out the API Documentation http://godoc.org/github.com/ansinlee/gomock
   * Check out more about the mock API Documentation https://godoc.org/github.com/stretchr/testify/mock
   * A little about [Test-Driven Development (TDD)](http://en.wikipedia.org/wiki/Test-driven_development)
 
 
 
-[`gotest`](http://godoc.org/github.com/ansinlee/gotest "API documentation") package
+[`gomock`](http://godoc.org/github.com/ansinlee/gomock "API documentation") package
 -------------------------------------------------------------------------------------------
 
 The `assert` package provides some helpful methods that allow you to write better test code in Go.
@@ -31,7 +31,7 @@ See it in action:
 ```go
 // run command: go test -v -gcflags=-l
 
-package gotest
+package gomock
 
 import (
 	"fmt"
@@ -134,7 +134,7 @@ func TestPatchValue(t *testing.T) {
 }
 ```
 
-For more information on how to write mock code, check out the [API documentation for the `gotest` package](http://godoc.org/github.com/ansinlee/gotest).
+For more information on how to write mock code, check out the [API documentation for the `gomock` package](http://godoc.org/github.com/ansinlee/gomock).
 ------
 
 Installation
@@ -142,7 +142,7 @@ Installation
 
 To install Testify, use `go get`:
 
-    go get github.com/ansinlee/gotest
+    go get github.com/ansinlee/gomock
 
 This will then make the following packages available to you:
 
@@ -154,7 +154,7 @@ This will then make the following packages available to you:
 Staying up to date
 ==================
 
-To update Testify to the latest version, use `go get -u github.com/ansinlee/gotest`.
+To update Testify to the latest version, use `go get -u github.com/ansinlee/gomock`.
 
 ------
 

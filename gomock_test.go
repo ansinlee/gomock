@@ -20,7 +20,7 @@ func Dosomething(a int) int {
 }
 
 func TestStubFunc(t *testing.T) {
-	tt := new(Test)
+	tt := new(Mock)
 	defer tt.Close()
 
 	tt.StubFunc(Dosomething, func(a int) int {
@@ -34,7 +34,7 @@ func TestStubFunc(t *testing.T) {
 }
 
 func TestStubInstFunc(t *testing.T) {
-	tt := new(Test)
+	tt := new(Mock)
 	defer tt.Close()
 
 	st := &T{A: 1}
@@ -50,7 +50,7 @@ func TestStubInstFunc(t *testing.T) {
 }
 
 func TestMockFunc(t *testing.T) {
-	tt := new(Test)
+	tt := new(Mock)
 	defer tt.Close()
 
 	// mock
@@ -67,7 +67,7 @@ func TestMockFunc(t *testing.T) {
 }
 
 func TestMockInstFunc(t *testing.T) {
-	tt := new(Test)
+	tt := new(Mock)
 	defer tt.Close()
 
 	// mock
@@ -86,7 +86,7 @@ func TestMockInstFunc(t *testing.T) {
 func TestPatchValue(t *testing.T) {
 	value := int(1)
 
-	tt := new(Test)
+	tt := new(Mock)
 
 	tt.PatchValue(&value, 2)
 

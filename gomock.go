@@ -8,15 +8,15 @@ import (
 	"github.com/stretchr/testify/mock"
 )
 
-type Test struct {
+type Mock struct {
 	mock.Mock // mock API Document: https://godoc.org/github.com/stretchr/testify/mock
 	patch     map[reflect.Value]reflect.Value
 }
 
-// Patch a value to this Test.
+// Patch a value to this Mock.
 //
 //     t.PatchValue(&orm.Debug, true)
-func (t *Test) PatchValue(target, replace interface{}) {
+func (t *Mock) PatchValue(target, replace interface{}) {
 	tv := reflect.Indirect(reflect.ValueOf(target))
 	rv := reflect.Indirect(reflect.ValueOf(replace))
 
@@ -39,27 +39,27 @@ func (t *Test) PatchValue(target, replace interface{}) {
 	tv.Set(reflect.Indirect(rv))
 }
 
-// Stub a func to this Test.
+// Stub a func to this Mock.
 //
 //     t.StubFunc("MyMethod", Func)
-func (t *Test) StubFunc(fnIn, fnOut interface{}) {
+func (t *Mock) StubFunc(fnIn, fnOut interface{}) {
 	monkey.Patch(fnIn, fnOut)
 	return
 }
 
-// StubInstanceMethod a func to this Test.
+// StubInstanceMethod a func to this Mock.
 //
 //     var d *net.Dialer
 //     t.StubInstFunc(d, "Dial", Func)
-func (t *Test) StubInstFunc(target interface{}, methodName string, replacement interface{}) {
+func (t *Mock) StubInstFunc(target interface{}, methodName string, replacement interface{}) {
 	monkey.PatchInstanceMethod(reflect.TypeOf(target), methodName, replacement)
 	return
 }
 
-// Mock a func to this Test.
+// Mock a func to this Mock.
 //
 //     t.MockFunc("MyMethod", Func)
-func (t *Test) MockFunc(methodName string, fn interface{}) {
+func (t *Mock) MockFunc(methodName string, fn interface{}) {
 	if v := reflect.ValueOf(fn); v.Kind() != reflect.Func {
 		panic(fmt.Sprintf("must be a Func in expectations. fn Type is \"%T\")", fn))
 	}
@@ -80,11 +80,11 @@ func (t *Test) MockFunc(methodName string, fn interface{}) {
 	return
 }
 
-// MockInstFunc a func to this Test.
+// MockInstFunc a func to this Mock.
 //
 //     var d *net.Dialer
 //     t.MockInstFunc("MyMethod", d, "Dial")
-func (t *Test) MockInstFunc(methodName string, target interface{}) {
+func (t *Mock) MockInstFunc(methodName string, target interface{}) {
 	tf := reflect.TypeOf(target)
 	mtd, ok := tf.MethodByName(methodName)
 	if !ok {
@@ -110,10 +110,10 @@ func (t *Test) MockInstFunc(methodName string, target interface{}) {
 	return
 }
 
-// Call at the end of this Test.
+// Call at the end of this Mock.
 //
 //     t.Close()
-func (t *Test) Close() {
+func (t *Mock) Close() {
 	monkey.UnpatchAll()
 	for v, it := range t.patch {
 		v.Set(it)
