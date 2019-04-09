@@ -27,8 +27,9 @@ The `assert` package provides some helpful methods that allow you to write bette
   * Optionally annotate each assertion with a message
 
 See it in action:
-
 ```go
+// run command: go test -v -gcflags=-l
+
 package yours
 
 import (
