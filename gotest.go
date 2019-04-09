@@ -9,8 +9,8 @@ import (
 )
 
 type Test struct {
-	mock.Mock
-	patch map[reflect.Value]reflect.Value
+	mock.Mock // mock API Document: https://godoc.org/github.com/stretchr/testify/mock
+	patch     map[reflect.Value]reflect.Value
 }
 
 // Patch a value to this Test.
